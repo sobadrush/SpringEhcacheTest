@@ -32,12 +32,18 @@ class SpringEhcacheTestApplicationTests {
 
 	@Test
 	void test002() {
+		System.out.println(" ================= 查第一次 =================");
+		deptRepository.findAll().stream().forEach(System.out::println);
+		System.out.println(" ================= 查第二次 ================="); // 若有標註 @Cacheable 則不會發送SQL查第二次
 		deptRepository.findAll().stream().forEach(System.out::println);
 	}
 	
 	@Test
 	void test003() {
 		int deptNo = 80;
+		System.out.println(" ================= 查第一次 =================");
+		System.out.println(deptRepository.findById(deptNo));
+		System.out.println(" ================= 查第二次 ================="); // 若有標註 @Cacheable 則不會發送SQL查第二次
 		System.out.println(deptRepository.findById(deptNo));
 	}
 	

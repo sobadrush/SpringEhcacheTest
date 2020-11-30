@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.ehcache.org/v3"
+	xmlns:jsr107="http://www.ehcache.org/v3/jsr107"
+	xsi:schemaLocation="http://www.ehcache.org/v3 
+	                        http://www.ehcache.org/schema/ehcache-core-3.2.xsd
+	                        http://www.ehcache.org/v3/jsr107
+	                        http://www.ehcache.org/schema/ehcache-107-ext-3.2.xsd">
+
+	<!-- Windows的緩存目錄為：C:\Users\登錄用戶~1\AppData\Local\Temp\ -->
+	<!-- Linux：/tmp -->
+	<persistence directory="java.io.tmpdir"/>
+	
+	<!-- "default"樣板(cache-template) -->
+	<cache-template name="default">
+		<resources>
+			<!-- 可以在 Heap 記憶體區緩存100個物件 -->
+			<heap unit="entries">100</heap>
+			<!-- Heap 記憶體區外則可緩存 128MB 大小的資料 -->
+			<offheap unit="MB">128</offheap>
+		</resources>
+	</cache-template>
+
+	<cache alias="DeptCache" uses-template="default">
+		<expiry>
+			<!-- 緩存有效時間設定為30秒 -->
+			<ttl unit="seconds">30</ttl>
+		</expiry>
+	</cache>
+
+<!-- 	<cache alias="Orders" uses-template="default"> -->
+<!-- 		<expiry> -->
+<!-- 			<ttl unit="seconds">600</ttl> -->
+<!-- 		</expiry> -->
+<!-- 	</cache> -->
+
+</config>
