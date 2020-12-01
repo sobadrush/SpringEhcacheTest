@@ -3,3 +3,9 @@ https://www.tpisoftware.com/tpu/articleDetails/1116
 
 [Spring Data Jpa 各種查詢]
 https://thorben-janssen.com/spring-data-jpa-query-annotation/
+
+[lombok]
+https://kucw.github.io/blog/2020/3/java-lombok/
+
+[lombok + eclipse]
+https://matthung0807.blogspot.com/2019/09/eclipse-lombok-installation.html
