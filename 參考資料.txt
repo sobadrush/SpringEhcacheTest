@@ -1,2 +1,5 @@
-實用的Cache套件--EHCache
+[實用的Cache套件--EHCache]
 https://www.tpisoftware.com/tpu/articleDetails/1116
+
+[Spring Data Jpa 各種查詢]
+https://thorben-janssen.com/spring-data-jpa-query-annotation/

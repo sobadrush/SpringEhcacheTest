@@ -9,8 +9,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 @Entity
 @Table(name = "dept_TB")
+@Data // lombok
+@Builder // lombok
+@AllArgsConstructor
+@NoArgsConstructor // lombok （像是 Spring Data JPA），會需要每個類都一定要有一個無參數的 constructor，所以你在加上 @AllArgsConstructor 時，拜託，一定要補上 @NoArgsConstrcutor，不然會有各種坑等著你
+@ToString // lombok
 public class DeptVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -18,7 +29,7 @@ public class DeptVO implements Serializable {
 	@Id
 	@Column(name = "deptno")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int deptNo;
+	private Integer deptNo;
 
 	@Column(name = "dname", length = 14)
 	private String deptName;
@@ -26,37 +37,4 @@ public class DeptVO implements Serializable {
 	@Column(name = "loc", length = 13)
 	private String deptLoc;
 
-	public DeptVO() {
-		super();
-	}
-
-	public int getDeptNo() {
-		return deptNo;
-	}
-
-	public void setDeptNo(int deptNo) {
-		this.deptNo = deptNo;
-	}
-
-	public String getDeptName() {
-		return deptName;
-	}
-
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
-	}
-
-	public String getDeptLoc() {
-		return deptLoc;
-	}
-
-	public void setDeptLoc(String deptLoc) {
-		this.deptLoc = deptLoc;
-	}
-
-	@Override
-	public String toString() {
-		return "DeptVO [deptNo=" + deptNo + ", deptName=" + deptName + ", deptLoc=" + deptLoc + "]";
-	}
-	
 }
