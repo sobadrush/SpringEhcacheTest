@@ -28,7 +28,7 @@ public class DeptVO implements Serializable {
 
 	@Id
 	@Column(name = "deptno")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer deptNo;
 
 	@Column(name = "dname", length = 14)

@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ctbc.demo.model.DeptVO;
 
@@ -46,4 +48,16 @@ public interface DeptRepository extends JpaRepository<DeptVO, Integer> {
 	// 使用JPQL查詢 + SPEL操作
 	@Query(value = "FROM DeptVO AS dd WHERE dd.deptName LIKE %?#{[0].toUpperCase()}%") // https://thorben-janssen.com/spring-data-jpa-query-annotation/
 	public List<DeptVO> getDeptVOsJpqlWithSpel(String keyword);
+	
+	@Transactional // 不加會報 Executing an update/delete query， ref. https://blog.csdn.net/jiangyu1013/article/details/80760211
+	@Modifying // 除了 SELECT 外都要加 
+	@Query(nativeQuery = true, value = "INSERT INTO dept_TB (dname, loc) VALUES( :pDeptName, :pDeptLoc )")
+	public int saveDeptVONativeQuery(@Param("pDeptName") String pDeptName, @Param("pDeptLoc") String pDeptLoc);
+	
+	@Transactional
+	@Modifying // 除了 SELECT 外都要加 
+	@Query("DELETE FROM DeptVO AS dd WHERE dd.deptNo = :pDeptNo")
+	public int deleteByDeptNo(@Param("pDeptNo") Integer deptNo);
+	
 }
+

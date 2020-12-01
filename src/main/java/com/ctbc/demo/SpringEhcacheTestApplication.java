@@ -6,8 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
+@EnableTransactionManagement // spring boot 會自動配置一個 DataSourceTransactionManager，我們只需在方法（或者類）加上 @Transactional 註解，就自動納入 Spring 的事務管理了 , (ref. https://www.itread01.com/content/1550054167.html)
 //@EnableEncryptableProperties
 @EnableCaching // For Ehcache
 public class SpringEhcacheTestApplication {

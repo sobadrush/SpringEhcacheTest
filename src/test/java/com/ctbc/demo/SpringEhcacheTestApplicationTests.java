@@ -9,12 +9,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ctbc.demo.dao.DeptRepository;
+import com.ctbc.demo.model.DeptVO;
 
 //@RunWith(SpringRunner.class)
 @SpringBootTest // @SpringBootTest的用途為找到@SpringBootApplication主配置類別來啟動Spring Boot應用程式環境 // ref.
 				// Could not find an 'annotation declaring class' for annotation type
+@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, readOnly = true, rollbackFor = Exception.class)
 class SpringEhcacheTestApplicationTests {
 
 	@Autowired
@@ -114,5 +120,32 @@ class SpringEhcacheTestApplicationTests {
 			System.out.println("data = " + data);
 		});
 	}
+	
+	@Test
+	@Rollback(true)
+	void test0012() {
+		System.out.println(" === save === ");
+		DeptVO paramVO = DeptVO.builder().deptName("航特部").deptLoc("台中清水").build();
+		DeptVO result = deptRepository.save(paramVO);
+		System.out.println("result = " + result);
+	}
+	
+	@Test
+	@Rollback(true)
+	void test0013() {
+		System.out.println(" === saveDeptVONativeQuery === ");
+		String pDeptName = "特戰部";
+		String pDeptLoc = "台南官田";
+		int result = deptRepository.saveDeptVONativeQuery(pDeptName, pDeptLoc);
+		System.out.println("result = " + result);
+	}
 
+	@Test
+	@Rollback(false)
+	void test0014() {
+		System.out.println(" === delete === ");
+//		DeptVO paramVO = DeptVO.builder().deptNo(20).deptName("研發部").deptLoc("臺灣新竹").build();
+		int pp = deptRepository.deleteByDeptNo(70);
+		System.out.println(" pp = " + pp);
+	}
 }
