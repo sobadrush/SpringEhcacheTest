@@ -148,4 +148,35 @@ class SpringEhcacheTestApplicationTests {
 		int pp = deptRepository.deleteByDeptNo(70);
 		System.out.println(" pp = " + pp);
 	}
+	
+	@Test
+	@Rollback(false)
+	void test0015() {
+		System.out.println(" === update === ");
+		DeptVO persistVO = deptRepository.findById(30).get();
+		System.out.println("persistVO : " + persistVO);
+		persistVO.setDeptName("業務部222");
+		DeptVO result = deptRepository.save(persistVO);
+		System.out.println("result = " + result);
+	}
+	
+	@Test
+	@Rollback(false)
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	void test0016() {
+		System.out.println(" === update === ");
+		DeptVO paramVO = DeptVO.builder().deptNo(30).deptName("AAA").deptLoc("BBB").build();
+		DeptVO rtnVO = deptRepository.save(paramVO);
+		System.out.println(" rtnVO = " + rtnVO);
+	}
+	
+	@Test
+	@Rollback(false)
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	void test0017() {
+		System.out.println(" === save === ");
+		DeptVO paramVO = DeptVO.builder()/*.deptNo(20)*/.deptName("飛彈部").deptLoc("桃園石門").build();
+		DeptVO rtnVO = deptRepository.save(paramVO);
+		System.out.println(" rtnVO = " + rtnVO);
+	}
 }
