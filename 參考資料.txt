@@ -9,3 +9,6 @@ https://kucw.github.io/blog/2020/3/java-lombok/
 
 [lombok + eclipse]
 https://matthung0807.blogspot.com/2019/09/eclipse-lombok-installation.html
+
+[Spring Boot @Transactional 配置事務管理]
+https://www.twblogs.net/a/5cc68fe4bd9eee1ac2ed5078

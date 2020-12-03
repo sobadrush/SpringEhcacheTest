@@ -151,12 +151,13 @@ class SpringEhcacheTestApplicationTests {
 	
 	@Test
 	@Rollback(false)
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	void test0015() {
 		System.out.println(" === update === ");
 		DeptVO persistVO = deptRepository.findById(30).get();
 		System.out.println("persistVO : " + persistVO);
 		persistVO.setDeptName("業務部222");
-		DeptVO result = deptRepository.save(persistVO);
+		DeptVO result = deptRepository.saveAndFlush(persistVO);
 		System.out.println("result = " + result);
 	}
 	
